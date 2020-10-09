@@ -34,7 +34,7 @@ defmodule SerexTest do
     assert Serex.Matcher.match(".ac", "abc") == false
   end
 
-  test "Regex matching zero or more" do
+  test "Regex matching zero or more (star)" do
     assert Serex.Matcher.match("a*bc", "abc") == true
     assert Serex.Matcher.match("a*bc", "aaaaabc") == true
     assert Serex.Matcher.match("a*bc", "bc") == true
@@ -42,7 +42,9 @@ defmodule SerexTest do
     assert Serex.Matcher.match("a*bc", "bbbbbbccc") == true
     assert Serex.Matcher.match("ab*c", "abbbbbbc") == true
     assert Serex.Matcher.match("ab*c", "aacc") == true
+    assert Serex.Matcher.match("ab*c", "cc") == false
     assert Serex.Matcher.match("abc*", "abccc") == true
     assert Serex.Matcher.match("abc*", "ab") == true
+    assert Serex.Matcher.match("abc*", "b") == false
   end
 end
