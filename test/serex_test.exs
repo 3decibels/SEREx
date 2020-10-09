@@ -3,6 +3,11 @@ defmodule SerexTest do
   doctest Serex.Lexer
   doctest Serex.Matcher
 
+  test "Lexing regex" do
+    assert Serex.Lexer.lex("abc") == [char: "a", char: "b", char: "c"]
+    assert Serex.Lexer.lex("^a.*c$") == [bol: nil, char: "a", wildcard: nil, star: nil, char: "c", eol: nil]
+  end
+
   test "Regex matching normal characters" do
     assert Serex.Matcher.match("a", "abc") == true
     assert Serex.Matcher.match("bc", "abc") == true
