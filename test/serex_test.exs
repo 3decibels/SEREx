@@ -40,5 +40,9 @@ defmodule SerexTest do
     assert Serex.Matcher.match("a*bc", "bc") == true
     assert Serex.Matcher.match("a*bc", "aaab") == false
     assert Serex.Matcher.match("a*bc", "bbbbbbccc") == true
+    assert Serex.Matcher.match("ab*c", "abbbbbbc") == true
+    assert Serex.Matcher.match("ab*c", "aacc") == true
+    assert Serex.Matcher.match("abc*", "abccc") == true
+    assert Serex.Matcher.match("abc*", "ab") == true
   end
 end
