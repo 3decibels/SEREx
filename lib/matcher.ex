@@ -51,7 +51,7 @@ defmodule Serex.Matcher do
   # Search for zero or more instances of a character at the start of a supplied list of chars
   defp match_star(_token , tokens, [] = _chars) when is_list(tokens), do: match_here(tokens, [])
   defp match_star({:wildcard, nil} = token, tokens, [_char_head | char_tail] = chars) when is_list(tokens) do
-    case match_here(tokens, char_tail) do
+    case match_here(tokens, chars) do
       true ->
         true
       _ ->
@@ -61,7 +61,7 @@ defmodule Serex.Matcher do
   defp match_star({:char, token_value} = token, tokens, [_char_head | char_tail] = chars) when is_list(tokens) do
     next_char = List.first(char_tail)
     cond do
-      match_here(tokens, char_tail) == true ->
+      match_here(tokens, chars) == true ->
         true
       next_char == token_value ->
         match_star(token, tokens, char_tail)
