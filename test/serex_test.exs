@@ -47,4 +47,13 @@ defmodule SerexTest do
     assert Serex.Matcher.match("abc*", "ab") == true
     assert Serex.Matcher.match("abc*", "b") == false
   end
+
+  test "Regex matching complex combinations" do
+    assert Serex.Matcher.match("^a.c$", "abc") == true
+    assert Serex.Matcher.match("^.*$", "abc") == true
+    assert Serex.Matcher.match("a.*c", "abbbbaabccbbbbc") == true
+    assert Serex.Matcher.match("a.*c$", "abbbbaabccb") == false
+    assert Serex.Matcher.match("^a.*c", "bbbbaabccb") == false
+    assert Serex.Matcher.match("a...c", "abbbc") == true
+  end
 end
