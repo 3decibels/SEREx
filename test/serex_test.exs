@@ -12,7 +12,7 @@ defmodule SerexTest do
     assert Serex.Matcher.match("a", "abc") == true
     assert Serex.Matcher.match("bc", "abc") == true
     assert Serex.Matcher.match("abc", "abc") == true
-    assert Serex.Matcher.match("d", "abc") == false
+    assert Serex.Matcher.match("c", "ab") == false
   end
 
   test "Regex matching beginning of line" do
@@ -55,5 +55,12 @@ defmodule SerexTest do
     assert Serex.Matcher.match("a.*c$", "abbbbaabccb") == false
     assert Serex.Matcher.match("^a.*c", "bbbbaabccb") == false
     assert Serex.Matcher.match("a...c", "abbbc") == true
+  end
+
+  test "Regex matching against empty string" do
+    assert Serex.Matcher.match("", "") == true
+    assert Serex.Matcher.match("^$", "") == true
+    assert Serex.Matcher.match("^.*$", "") == true
+    assert Serex.Matcher.match("^a*$", "") == true
   end
 end
